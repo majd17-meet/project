@@ -35,13 +35,15 @@ button {background-color: #800080; color: white; padding: 1%;margin: 1%;width: 5
 
 <body>
  <div class="container" align="center">
-    <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="name" required>
+ <form action = "{{url_for('login')}}" method = 'post' >
+    <label><b>Email</b></label>
+    <input type="text" placeholder="Enter Username" name="email" required>
 
     <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" required>
         
-    <button type="submit">Login</button>
+    <input type="submit" value = "Log in">
+    </form>
   </div>
 
   <div class="container" align="center" style="background-color:#f1f1f1">

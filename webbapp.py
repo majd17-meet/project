@@ -1,14 +1,14 @@
-from flask import Flask, request, render_template
-#from model import *
+from flask import Flask, request, url_for, render_template, redirect
+from model import *
 from flask import session as login_session
 from flask import g
 
 app = Flask(__name__)
-
-#engine = create_engine('sqlite:///project.db')
-#Base.metadata.bind = engine
-#DBSession = sessionmaker(bind=engine)
-#session = DBSession()
+app.secret_key = "MYSECRETKEY"
+engine = create_engine('sqlite:///quotes.db')
+Base.metadata.bind = engine
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
 
 @app.route('/')
 def main_page():
@@ -26,12 +26,30 @@ def aboutus():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-	if request.method == 'GET':
-		return render_template("login.html")
+    if request.method == 'GET':
+        return render_template("login.html")
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        if verify_password(email, password):
+            user = session.query(User).filter_by(email=email).first()
+            login_session['name'] = user.name
+            login_session['id'] = user.id
+            login_session['email'] = user.email
+            return redirect(url_for('main_page'))
+@app.route("/logout")
+def logout():
+    del login_session['id']
+    del login_session['name']
+    del login_session['email']
+    return redirect(url_for('main_page'))
 
-#@app.route('/logout', methods = ['POST'])
-#def logout():
-#	return "mainpage.html"
+def verify_password(email, password):
+    user = session.query(User).filter_by(email=email).first()
+    if not user or not user.verify_password(password):
+        return False
+    return True
+
 
 @app.route('/signup', methods = ['GET','POST'])
 def signup():
