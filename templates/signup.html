@@ -14,14 +14,14 @@
 
 <tr>
 <td width = 10% > 
-<a style="color:white" class="navbar-brand" href="mainpage.html">Home</a></td>
-<td ><a style="color:white" href="profile.html">profile</a></td>
+<a style="color:white" class="navbar-brand" href="{{url_for('main_page')}}">Home</a></td>
+<td ><a style="color:white" href="{{url_for('logmein')}}">Login</a></td>
 <td width = 10% align="right">
-<a style="color:white" href="aboutus.html">About</a></td>
+<a style="color:white" href="{{url_for('aboutus')}}">About</a></td>
 <td width = 10% align="right">
-<a style="color:white" href="signup.html">Sign up</a></td>
+<a style="color:white" href="#">Sign up</a></td>
 </tr>
-<td colspan="3" align="center"><img src="logo.jpg" width="250" height="150"></td></tr>
+<td colspan="3" align="center"><img src="{{url_for('static', filename = 'logo.jpg')}}" width="250" height="150"></td></tr>
 <table>
 
 <p>&nbsp;</p>
@@ -54,7 +54,7 @@ button {background-color: #800080; color: white; padding: 1%;margin: 1%;width: 5
     <button type="submit">Sign up</button>
   </div>
 
-  <div class="container" align="center" style="background-color:#f1f1f1">
+  <div align="center" >
     <button type="button" class="cancelbtn" >Cancel</button>
   </div>
 </form>

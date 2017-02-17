@@ -16,9 +16,9 @@ def main_page():
 	return render_template('mainpage.html')
 
 	
-@app.route('/profile')
-def showProfile():
-	return render_template('profile.html')
+@app.route('/login')
+def logmein():
+	return render_template('login.html')
 
 @app.route('/aboutus')
 def aboutus():
